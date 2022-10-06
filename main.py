@@ -39,11 +39,15 @@ def step_user(update, context):
     global i  
     if candle>0:       
         text = update.message.text
-        candle=candle-int(text)
-        context.bot.send_message(update.effective_chat.id, f'Ты взял {text} конфет. Осталось {candle}. Набери бот')
-        cand2=cand2+int(text)
-        i=1
-        return C
+        if int(text)>28:
+            context.bot.send_message(update.effective_chat.id, 'Ай-ай! Ты хочешь забрать слишком много конфет! Попробуй еще раз')
+            return B
+        else:
+            candle=candle-int(text)
+            context.bot.send_message(update.effective_chat.id, f'Ты взял {text} конфет. Осталось {candle}. Набери бот')
+            cand2=cand2+int(text)
+            i=1
+            return C
     else: 
         context.bot.send_message(update.effective_chat.id, f'Игра закончена. Хочешь узнать кто выиграл?')
         return D
